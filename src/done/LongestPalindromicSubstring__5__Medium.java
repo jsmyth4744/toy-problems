@@ -1,10 +1,12 @@
+package done;
 
 /**
  * Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
  */
-public class LongestPalindromicSubstring__5__TODO {
+public class LongestPalindromicSubstring__5__Medium {
 
     /**
+     * DP quadratic time and space
      */
     private static String longestPalindrome(String s) {
 
@@ -13,12 +15,12 @@ public class LongestPalindromicSubstring__5__TODO {
         char[] a = s.toCharArray();
 
         /* Solution */
-        for (int i = 0; i < s.length(); i++) {   // prefix
-            for (int j = i; j >= 0; j--) {   // suffix of prefix
+        for (int i = 0; i < s.length(); i++) {   // prefix ends at i
+            for (int j = i; j >= 0; j--) {   // suffix of prefix starts from j
                 /* debug logging * /
                 System.out.println(s.substring(j, i + 1));
                 /* debug logging */
-                dp[i][j] = a[i] == a[j] && (i - j <= 2 || dp[i - 1][j + 1]);
+                dp[i][j] = a[i] == a[j] && (i - j <= 2 || dp[i - 1][j + 1]);    // a*a is palindrome iff * is palindrome
                 res = ((dp[i][j] && res.length() < i - j + 1)) ? s.substring(j, i + 1) : res;
             }
         }
@@ -38,13 +40,6 @@ public class LongestPalindromicSubstring__5__TODO {
         /* Solution */
 
         return res;
-    }
-
-    /**
-     * Manacher's linear time solution
-     */
-    private static String longestPalindromeManachers(String s) {
-        return s;
     }
 
     public static void main(String[] args) {
