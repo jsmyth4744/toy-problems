@@ -1,7 +1,6 @@
 package done;// A Java program for Prim's Minimum Spanning Tree (MST) algorithm.
 // The program is for adjacency matrix representation of the graph
 
-import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
 class MinimumSpanningTree__GFG {
@@ -12,14 +11,15 @@ class MinimumSpanningTree__GFG {
     // value, from the set of vertices not yet included in done.MinimumSpanningTree__GFG
     int minKey(int key[], boolean mstSet[]) {
         // Initialize min value
-        int min = key[0];
+        int min = Integer.MAX_VALUE, min_index = -1;
 
-        OptionalInt res = IntStream
-                .range(0, key.length)
-                .filter(v -> !mstSet[v] && key[v] <= min)
-                .min();
-
-        return res.isPresent() ? res.getAsInt() : min;
+        for (int v = 0; v < V; v++) {
+            if (!mstSet[v] && key[v] < min) {
+                min = key[v];
+                min_index = v;
+            }
+        }
+        return min_index;
     }
 
     // A utility function to print the constructed done.MinimumSpanningTree__GFG stored in
